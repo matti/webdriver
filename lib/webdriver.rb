@@ -4,6 +4,10 @@ require "net/http"
 require "json"
 
 module Webdriver
+  def self.debug(args)
+    return unless ENV["WEBDRIVER_DEBUG"]
+    p args
+  end
 end
 
 require_relative "webdriver/version"

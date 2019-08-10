@@ -18,6 +18,7 @@ module Webdriver
     def call(method, path, headers={}, body={})
       path = "/#{path}"
       body_json = body.to_json if body
+      Webdriver.debug [method, path, headers, body_json]
 
       response = case method
       when :get
