@@ -15,7 +15,7 @@ module Webdriver
       value.map { |json| Webdriver::Session.new json, @connection }
     end
 
-    def session
+    def session!
       json = @connection.post "session", {}, {
         desiredCapabilities: @desired_capabilities
       }

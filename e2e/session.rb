@@ -1,4 +1,4 @@
-session = $client.session
+session = $client.session!
 raise unless session.id
 
-session.delete
+session.delete!

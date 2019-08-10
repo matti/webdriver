@@ -1,6 +1,6 @@
-require "webdriver"
+require_relative "../lib/webdriver"
 $client = Webdriver::Client.new "http://localhost:9515"
-$client.sessions.map(&:delete)
+$client.sessions.map(&:delete!)
 
 require_relative "status"
 require_relative "sessions"

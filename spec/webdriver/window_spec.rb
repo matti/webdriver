@@ -1,5 +1,5 @@
 RSpec.describe Webdriver::Client do
-  let(:subject) { @client.session.windows.first }
+  let(:subject) { @client.session!.windows.first }
 
   it do
     expect(subject).to be_an_instance_of(Webdriver::Window)
@@ -10,11 +10,11 @@ RSpec.describe Webdriver::Client do
   end
 
   it do
-    subject.maximize
+    subject.maximize!
   end
 
   it do
-    subject.minimize
+    subject.minimize!
   end
 
 end

@@ -34,7 +34,7 @@ RSpec.configure do |config|
   end
 
   config.after :each do
-    @client.sessions.map(&:delete)
+    @client.sessions.map(&:delete!)
     Process.kill "TERM", @__chromedriver_pid
   end
 end

@@ -1,5 +1,5 @@
 RSpec.describe Webdriver::Client do
-  let(:subject) { @client.session }
+  let(:subject) { @client.session! }
 
   it do
     expect(subject).to be_an_instance_of(Webdriver::Session)

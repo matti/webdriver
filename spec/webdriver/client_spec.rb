@@ -14,6 +14,6 @@ RSpec.describe Webdriver::Client do
   end
 
   it do
-    expect(subject.session).to be_an_instance_of Webdriver::Session
+    expect(subject.session!).to be_an_instance_of Webdriver::Session
   end
 end
