@@ -45,8 +45,12 @@ module Webdriver
           value
         end
       else
-        p response_body
-        raise "err"
+        if method == :get && path == "/status"
+          value
+        else
+          pp [status, response_body]
+          raise "err"
+        end
       end
     end
   end
