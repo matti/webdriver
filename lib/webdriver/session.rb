@@ -42,5 +42,11 @@ module Webdriver
       @connection.get "title"
     end
 
+    def execute_sync! script, args=[]
+      @connection.post "execute/sync", {}, {
+        script: script,
+        args: args
+      }
+    end
   end
 end
