@@ -12,4 +12,8 @@ RSpec.describe Webdriver::Client do
   it do
     expect(subject.windows.size).to eq 1
   end
+
+  it do
+    expect(subject.screenshot).to start_with "iVBOR"
+  end
 end

@@ -48,5 +48,9 @@ module Webdriver
         args: args
       }
     end
+
+    def screenshot
+      @connection.get "screenshot"
+    end
   end
 end
