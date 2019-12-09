@@ -1,5 +1,5 @@
 require_relative "../lib/webdriver"
-require "pry"
+
 capabilities = {
   chromeOptions: {
     args: [
@@ -13,5 +13,4 @@ wd = Webdriver::Client.new "http://localhost:9515/wd/hub", capabilities
 s = wd.session!
 w = s.windows.first
 
-binding.pry
 s.delete!
