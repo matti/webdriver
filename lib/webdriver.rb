@@ -16,4 +16,5 @@ require_relative "webdriver/prefix_connection"
 
 require_relative "webdriver/window"
 require_relative "webdriver/session"
+require_relative "webdriver/element"
 require_relative "webdriver/client"

@@ -52,5 +52,21 @@ module Webdriver
     def screenshot
       @connection.get "screenshot"
     end
+
+    def element(using, value)
+      el = @connection.post "element", {}, {
+        using: using,
+        value: value
+      }
+      Webdriver::Element.new el["ELEMENT"], @connection
+    end
+
+    def elements(using, value)
+      resp = @connection.post "elements", {}, {
+        using: using,
+        value: value
+      }
+      resp.map { |el| Webdriver::Element.new el["ELEMENT"], @connection }
+    end
   end
 end
