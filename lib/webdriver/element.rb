@@ -9,6 +9,36 @@ module Webdriver
       @connection = Webdriver::PrefixConnection.new "element/#{@id}", connection
     end
 
+    def screenshot
+      @connection.get "screenshot"
+    end
+
+    # checkbox
+    def selected?
+      @connection.get "selected"
+    end
+
+    # form control enabled
+    def enabled?
+      @connection.get "enabled"
+    end
+
+    def clear!
+      @connection.post "clear"
+      click!
+    end
+
+    def value! value
+      value_string = value.to_s
+      if value_string == ""
+        clear!
+      else
+        @connection.post "value", {}, {
+          value: [value_string]
+        }
+      end
+    end
+
     def text
       @connection.get "text"
     end
@@ -19,6 +49,10 @@ module Webdriver
 
     def tag
       @connection.get "name"
+    end
+
+    def css name
+      @connection.get File.join("css", name)
     end
 
     def property name
@@ -33,7 +67,7 @@ module Webdriver
       @connection.post "click"
     end
 
-    def element(using, value)
+    def element using, value
       el = @connection.post "element", {}, {
         using: using,
         value: value
@@ -41,7 +75,7 @@ module Webdriver
       Webdriver::Element.new el["ELEMENT"], @session_connection
     end
 
-    def elements(using, value)
+    def elements using, value
       resp = @connection.post "elements", {}, {
         using: using,
         value: value

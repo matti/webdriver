@@ -23,7 +23,7 @@ module Webdriver
         x: x,
         y: y
       })
-      rect
+      self
     end
 
     def rect
@@ -32,10 +32,12 @@ module Webdriver
 
     def fullscreen!
       @connection.post "fullscreen"
+      self
     end
 
     def close!
       @connection.delete
+      self
     end
   end
 end

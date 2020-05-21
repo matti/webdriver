@@ -1,21 +1,23 @@
 module Webdriver
   class Connection
-    def initialize(endpoint)
+    def initialize endpoint
       uri = URI(endpoint)
       @http = Net::HTTP.new uri.hostname, uri.port
     end
 
-    def get(path, headers={})
+    def get path, headers={}
       call :get, path, headers
     end
-    def post(path, headers={}, body=nil)
-      call :post, path, headers, body
-    end
-    def post(path, headers={}, body=nil)
+
+    def post path, headers={}, body=nil
       call :post, path, headers, body
     end
 
-    def call(method, path, headers={}, body={})
+    def post path, headers={}, body=nil
+      call :post, path, headers, body
+    end
+
+    def call method, path, headers={}, body={}
       path = "/#{path}"
       body_json = body.to_json if body
       Webdriver.debug [method, path, headers, body_json]
@@ -45,12 +47,15 @@ module Webdriver
         else # everything else works like this
           value
         end
+      when 1..nil
+        error_message = value.dig("message")
+        pp [:err, value.dig("message")]
+        raise error_message
       else
         if method == :get && path == "/status"
           value
         else
-          pp [status, response_body]
-          raise "err"
+          raise value.dig("message")
         end
       end
     end
