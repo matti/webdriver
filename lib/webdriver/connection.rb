@@ -48,14 +48,14 @@ module Webdriver
           value
         end
       when 1..nil
+        # 10: stale element reference: element is not attached to the page document
         error_message = value.dig("message")
-        pp [:err, value.dig("message")]
-        raise error_message
+        raise "#{status}: #{error_message}"
       else
         if method == :get && path == "/status"
           value
         else
-          raise value.dig("message")
+          raise [:unknown, response_body]
         end
       end
     end
