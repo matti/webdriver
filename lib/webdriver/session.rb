@@ -9,7 +9,7 @@ module Webdriver
 
     def delete!
       @connection.delete
-      session
+      self
     end
 
     def windows
