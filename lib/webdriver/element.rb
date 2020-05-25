@@ -26,6 +26,7 @@ module Webdriver
     def clear!
       @connection.post "clear"
       click!
+      self
     end
 
     def value! value
