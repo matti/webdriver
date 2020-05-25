@@ -18,6 +18,10 @@ module Webdriver
       @connection.get "screenshot"
     end
 
+    def displayed?
+      @connection.get "displayed"
+    end
+
     # checkbox
     def selected?
       @connection.get "selected"
