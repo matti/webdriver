@@ -9,6 +9,11 @@ module Webdriver
       @connection = Webdriver::PrefixConnection.new "element/#{@id}", connection
     end
 
+    def ==(other)
+      return false unless other.is_a? Webdriver::Element
+      @id == other.id
+    end
+
     def screenshot
       @connection.get "screenshot"
     end
