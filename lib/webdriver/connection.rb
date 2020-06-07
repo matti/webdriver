@@ -47,9 +47,11 @@ module Webdriver
         else # everything else works like this
           value
         end
+      when 10
+        raise Webdriver::StaleElementReferenceError
+      when 11
+        raise Webdriver::ElementNotInteractableError
       when 1..nil
-        # 10: stale element reference: element is not attached to the page document
-        # 11: element not interactable
         error_message = value.dig("message")
         raise "#{status}: #{error_message}"
       else
