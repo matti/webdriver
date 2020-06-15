@@ -3,6 +3,7 @@ module Webdriver
     def initialize endpoint
       uri = URI(endpoint)
       @http = Net::HTTP.new uri.hostname, uri.port
+      @mutex = Mutex.new
     end
 
     def get path, headers={}
@@ -22,15 +23,17 @@ module Webdriver
       body_json = body.to_json if body
       Webdriver.debug [method, path, headers, body_json]
 
-      response = case method
-      when :get
-        @http.get path
-      when :post
-        @http.post path, body_json
-      when :delete
-        @http.delete path, body_json
-      else
-        raise "err"
+      response = @mutex.synchronize do
+        case method
+        when :get
+          @http.get path
+        when :post
+          @http.post path, body_json
+        when :delete
+          @http.delete path, body_json
+        else
+          raise "err"
+        end
       end
 
       response_body = JSON.parse response.body
