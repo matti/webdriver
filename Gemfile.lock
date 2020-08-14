@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webdriver (0.9.1)
+    webdriver (0.10.0)
 
 GEM
   remote: https://rubygems.org/

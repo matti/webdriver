@@ -22,6 +22,20 @@ module Webdriver
     #   @connection.post "source"
     # end
 
+    def chromium_network_conditions
+      @connection.get "chromium/network_conditions"
+    end
+
+    def chromium_network_conditions=(conditions)
+      @connection.post "chromium/network_conditions", {}, conditions
+      self
+    end
+
+    def chromium_network_conditions_delete!
+      @connection.delete "chromium/network_conditions"
+      self
+    end
+
     def dismiss_alert!
       @connection.post "alert/dismiss"
       self
