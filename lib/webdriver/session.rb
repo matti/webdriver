@@ -17,16 +17,89 @@ module Webdriver
       value.map { |id| Webdriver::Window.new id, @connection }
     end
 
+    def chromium_send_command_and_get_result! opts
+      # cmd: "Browser.getVersion", params: {}
+      @connection.post "chromium/send_command_and_get_result", {}, opts
+    end
+
+    def is_loading?
+      @connection.get "is_loading"
+    end
+
+    def page_freeze!
+      @connection.post "goog/page/freeze"
+    end
+
+    def page_resume!
+      # needs window min/max / timeout to resume
+      @connection.post "goog/page/resume"
+    end
+
+    # https://www.rubydoc.info/gems/selenium-webdriver/Selenium/WebDriver/Keys
+    # enter "\ue007"
+    def keys= opts
+      @connection.post "keys", {}, opts
+    end
+
+    def moveto! opts
+      # xoffset, yoffset, element
+      @connection.post "moveto", {}, opts
+    end
+
+    def location
+      @connection.get "location"
+    end
+
+    def location! opts
+      #{location: {latitude: 20, longitude:20}}
+      @connection.post "location", {}, opts
+    end
+
+    def reporting_generate_test_report! opts
+      @connection.post "reporting/generate_test_report", {}, opts
+    end
+
+    def timeouts
+      @connection.get "timeouts"
+    end
+
+    def timeouts! opts
+      @connection.post "timeouts", {}, opts
+      self
+    end
+
+    def timeouts_async_script! opts
+      @connection.post "timeouts/async_script", {}, opts
+    end
+
+    def log_types
+      @connection.get "log/types"
+    end
+
+    def log type
+      @connection.post "log", {}, {
+        type: type
+      }
+    end
+
+    def application_cache_status
+      @connection.get "application_cache/status"
+    end
+
     # not implemented in chromedriver
-    # def source
-    #   @connection.post "source"
-    # end
+    def source
+      @connection.get "source"
+    end
+
+    def chromium_heap_snapshot
+      @connection.get "chromium/heap_snapshot"
+    end
 
     def chromium_network_conditions
       @connection.get "chromium/network_conditions"
     end
 
-    def chromium_network_conditions=(conditions)
+    def chromium_network_conditions! conditions
       @connection.post "chromium/network_conditions", {}, conditions
       self
     end
@@ -163,13 +236,16 @@ module Webdriver
       end
     end
 
-    # not implemented in chromedriver
-    # def print!
-    #   @connection.post "print"
-    # end
+    def print! opts
+      @connection.post "print", {} opts
+    end
 
     def screenshot
       @connection.get "screenshot"
+    end
+
+    def screenshot_full
+      @connection.get "screenshot/full"
     end
 
     # when moving with tab, or clicked

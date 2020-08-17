@@ -42,7 +42,11 @@ module Webdriver
       session_id = response_body.dig "sessionId"
       value = response_body.dig "value"
 
+
       case status
+      when nil
+        # application_status_cache
+        value
       when 0
         # POST /session has different response structure than other calls
         if method == :post && path == "/session"
@@ -61,7 +65,7 @@ module Webdriver
         if method == :get && path == "/status"
           value
         else
-          raise [:unknown, response_body]
+          raise "unknown status: #{status}"
         end
       end
     end

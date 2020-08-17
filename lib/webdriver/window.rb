@@ -3,7 +3,20 @@ module Webdriver
     attr_reader :id
     def initialize(id, connection)
       @id = id
-      @connection = Webdriver::PrefixConnection.new "window", connection
+      @session_connection = connection
+      @connection = Webdriver::PrefixConnection.new "window/#{@id}", connection
+    end
+
+    def size
+      @connection.get "size"
+    end
+
+    def position
+      @connection.get "position"
+    end
+
+    def position! opts
+      @connection.post "position", {}, opts
     end
 
     def maximize!
@@ -12,22 +25,22 @@ module Webdriver
     end
 
     def minimize!
-      @connection.post "minimize"
+      @session_connection.post "window/minimize"
       self
     end
 
     def rect! width: nil, height: nil, x: nil, y:nil
-      @connection.post("rect", {}, {
+      @session_connection.post "window/rect", {}, {
         width: width,
         height: height,
         x: x,
         y: y
-      })
+      }
       self
     end
 
     def rect
-      @connection.get "rect"
+      @session_connection.get "window/rect"
     end
 
     def fullscreen!

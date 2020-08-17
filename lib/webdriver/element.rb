@@ -14,6 +14,14 @@ module Webdriver
       @id == other.id
     end
 
+    def location_in_view
+      @connection.get "location_in_view"
+    end
+
+    def size
+      @connection.get "size"
+    end
+
     def screenshot
       @connection.get "screenshot"
     end
