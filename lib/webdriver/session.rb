@@ -237,7 +237,7 @@ module Webdriver
     end
 
     def print! opts
-      @connection.post "print", {} opts
+      @connection.post "print", {}, opts
     end
 
     def screenshot
