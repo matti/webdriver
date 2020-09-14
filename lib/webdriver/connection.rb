@@ -58,6 +58,8 @@ module Webdriver
         raise Webdriver::StaleElementReferenceError
       when 11
         raise Webdriver::ElementNotInteractableError
+      when 13
+        raise Webdriver::UnknownErrorUnhandledInspectorError
       when 1..nil
         error_message = value.dig("message")
         raise "#{status}: #{error_message}"
