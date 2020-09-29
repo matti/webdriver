@@ -60,6 +60,8 @@ module Webdriver
         raise Webdriver::ElementNotInteractableError
       when 13
         raise Webdriver::UnknownErrorUnhandledInspectorError
+      when 28
+        raise Webdriver::ScriptTimeout
       when 1..nil
         error_message = value.dig("message")
         raise "#{status}: #{error_message}"
