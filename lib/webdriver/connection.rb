@@ -54,14 +54,18 @@ module Webdriver
         else # everything else works like this
           value
         end
+      when 7
+        raise Webdriver::NoSuchElementError.new value.dig("message")
+      when 8
+        raise Webdriver::NoSuchFrameError.new body[:id]
       when 10
-        raise Webdriver::StaleElementReferenceError
+        raise Webdriver::StaleElementReferenceError.new path
       when 11
-        raise Webdriver::ElementNotInteractableError
+        raise Webdriver::ElementNotInteractableError.new path
       when 13
-        raise Webdriver::UnknownErrorUnhandledInspectorError
+        raise Webdriver::UnknownErrorUnhandledInspectorError.new value.dig("message")
       when 28
-        raise Webdriver::ScriptTimeout
+        raise Webdriver::ScriptTimeout.new value.dig("message")
       when 1..nil
         error_message = value.dig("message")
         raise "#{status}: #{error_message}"
