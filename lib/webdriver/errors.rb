@@ -9,6 +9,10 @@ module Webdriver
   class ElementNotInteractableError < StandardError; end
   # 13
   class UnknownErrorUnhandledInspectorError < StandardError; end
+  # 26
+  class UnexpectedAlertOpen < StandardError; end
+  # 27
+  class NoSuchAlert < StandardError; end
   # 28
   class ScriptTimeout < StandardError; end
 end

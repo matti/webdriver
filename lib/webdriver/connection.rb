@@ -68,6 +68,10 @@ module Webdriver
         raise Webdriver::ElementNotInteractableError.new path
       when 13
         raise Webdriver::UnknownErrorUnhandledInspectorError.new value.dig("message")
+      when 26
+        raise Webdriver::UnexpectedAlertOpen.new value.dig("message")
+      when 27
+        raise Webdriver::NoSuchAlert.new value.dig("message")
       when 28
         raise Webdriver::ScriptTimeout.new value.dig("message")
       when 1..nil
