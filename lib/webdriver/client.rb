@@ -1,8 +1,8 @@
 module Webdriver
   class Client
-    def initialize(endpoint, desired_capabilities={})
+    def initialize(endpoint, desired_capabilities={}, opts={})
       uri = URI(endpoint)
-      @connection = Webdriver::Connection.new endpoint
+      @connection = Webdriver::Connection.new endpoint, opts
       @desired_capabilities = desired_capabilities
     end
 
