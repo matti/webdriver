@@ -10,6 +10,7 @@ require "webdriver"
 require "pry"
 
 c = Webdriver::Client.new "http://localhost:9515"
+
 s = if c.sessions.length > 0
   c.sessions.last
 else

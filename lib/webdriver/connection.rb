@@ -1,6 +1,6 @@
 module Webdriver
   class Connection
-    def initialize endpoint, open_timeout: 3, read_timeout: 5, write_timeout: 5
+    def initialize(endpoint, open_timeout: 3, read_timeout: 5, write_timeout: 5)
       uri = URI(endpoint)
       @http = Net::HTTP.new uri.hostname, uri.port
       @http.open_timeout = open_timeout
